@@ -1,0 +1,668 @@
+/* ============================================
+   ULTRA PREMIUM V2 - Cyber Glass Portfolio
+   ============================================ */
+
+:root {
+  /* Neon Cyber Palette */
+  --bg: #02040a;
+  --bg-secondary: #0a0f1d;
+  --panel: rgba(10, 15, 29, 0.6);
+  --panel-glass: rgba(255, 255, 255, 0.03);
+  --panel-strong: rgba(255, 255, 255, 0.08);
+  --text: #f0f8ff;
+  --text-secondary: #a0b0c0;
+  --cyan: #00f5ff;
+  --cyan-dim: #00a8b0;
+  --pink: #ff4fd8;
+  --pink-dim: #b03890;
+  --yellow: #ffe84d;
+  --yellow-dim: #b09840;
+  --purple: #a855f7;
+  --purple-dim: #7030a0;
+  --border: rgba(255, 255, 255, 0.08);
+  --border-glow: rgba(0, 245, 255, 0.3);
+  --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 8px 32px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 20px 80px rgba(0, 0, 0, 0.5);
+  --shadow-neon: 0 0 40px rgba(0, 245, 255, 0.4);
+  --shadow-glow: 0 0 60px rgba(255, 79, 216, 0.3);
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-xl: 32px;
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-orbitron: 'Orbitron', sans-serif;
+  --font-space: 'Space Grotesk', sans-serif;
+  
+  /* Animation Timing */
+  --duration-fast: 0.2s;
+  --duration-normal: 0.4s;
+  --duration-slow: 0.8s;
+  --duration-super: 1.2s;
+  
+  /* Spring Physics */
+  --spring-stiff: 250, 30, 5;
+  --spring-normal: 200, 20, 3;
+  --spring-loose: 150, 15, 2;
+}
+
+/* Light Mode - Ultra Premium */
+html[data-theme='light'] {
+  --bg: #f8fafc;
+  --bg-secondary: #eef2f6;
+  --panel: rgba(255, 255, 255, 0.85);
+  --panel-glass: rgba(255, 255, 255, 0.95);
+  --panel-strong: rgba(255, 255, 255, 1);
+  --text: #0f172a;
+  --text-secondary: #475569;
+  --border: rgba(0, 0, 0, 0.06);
+  --border-glow: rgba(0, 245, 255, 0.2);
+  --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 8px 32px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 20px 80px rgba(0, 0, 0, 0.12);
+}
+
+/* ============================================
+   BASE - Ultra Premium
+   ============================================ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-sans);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Animated Background Grid */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: 
+    linear-gradient(90deg, rgba(0,245,255,0.03) 1px, transparent 1px) 0 0 / 50px 50px,
+    linear-gradient(0deg, rgba(255,79,216,0.03) 1px, transparent 1px) 0 0 / 50px 50px;
+  pointer-events: none;
+  z-index: -1;
+  animation: gridMove 20s linear infinite;
+}
+
+@keyframes gridMove {
+  0% { transform: translate(0, 0); }
+  100% { transform: translate(50px, 50px); }
+}
+
+/* CRT Scanlines Effect */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent 0%,
+    rgba(0, 0, 0, 0.03) 50%,
+    transparent 100%
+  ) 0 0 / 100% 4px;
+  pointer-events: none;
+  z-index: 9998;
+  opacity: 0.4;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color var(--duration-fast) ease;
+}
+
+a:hover {
+  color: var(--cyan);
+}
+
+img {
+  max-width: 100%;
+  display: block;
+  transition: transform var(--duration-normal) ease;
+}
+
+img:hover {
+  transform: scale(1.02);
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-family: var(--font-sans);
+  font-size: 16px;
+  transition: all var(--duration-fast) ease;
+}
+
+input, textarea, select {
+  font-family: var(--font-sans);
+  font-size: 16px;
+}
+
+/* ============================================
+   GLASSMORPHISM - Ultra Premium 2025
+   ============================================ */
+.glass {
+  background: var(--panel-glass);
+  border: 1px solid var(--border);
+  backdrop-filter: blur(30px) saturate(180%);
+  box-shadow: 
+    var(--shadow-md),
+    0 0 0 1px rgba(255, 255, 255, 0.05);
+  border-radius: var(--radius-lg);
+  position: relative;
+  overflow: hidden;
+}
+
+.glass::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.1) 0%,
+    transparent 50%,
+    rgba(0, 245, 255, 0.05) 100%
+  );
+  pointer-events: none;
+}
+
+.glass-neon {
+  background: var(--panel);
+  border: 1px solid var(--border-glow);
+  box-shadow: 
+    var(--shadow-lg),
+    var(--shadow-neon);
+}
+
+.glass-pink {
+  border: 1px solid rgba(255, 79, 216, 0.3);
+  box-shadow: 
+    var(--shadow-lg),
+    var(--shadow-glow);
+}
+
+/* Holographic Hover Effect */
+.holo-hover {
+  transition: all var(--duration-normal) cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.holo-hover:hover {
+  transform: translateY(-4px) scale(1.01);
+  box-shadow: 
+    var(--shadow-lg),
+    0 0 80px rgba(0, 245, 255, 0.3),
+    0 0 120px rgba(255, 79, 216, 0.2);
+}
+
+.holo-hover::after {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  background: linear-gradient(
+    90deg,
+    var(--cyan),
+    var(--pink),
+    var(--yellow),
+    var(--cyan)
+  );
+  opacity: 0;
+  transition: opacity var(--duration-normal) ease;
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+}
+
+.holo-hover:hover::after {
+  opacity: 0.5;
+}
+
+/* ============================================
+   TYPOGRAPHY - Ultra Premium
+   ============================================ */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+h1 { font-size: clamp(40px, 5vw, 72px); }
+h2 { font-size: clamp(32px, 4vw, 56px); }
+h3 { font-size: clamp(24px, 3vw, 36px); }
+h4 { font-size: clamp(20px, 2.5vw, 28px); }
+
+.gradient-text {
+  background: linear-gradient(
+    90deg,
+    var(--cyan) 0%,
+    var(--pink) 50%,
+    var(--yellow) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  background-size: 200% auto;
+  animation: gradientShift 4s ease infinite;
+}
+
+@keyframes gradientShift {
+  0%, 100% { background-position: 0% center; }
+  50% { background-position: 100% center; }
+}
+
+.text-glow {
+  text-shadow: 
+    0 0 20px rgba(0, 245, 255, 0.5),
+    0 0 40px rgba(255, 79, 216, 0.3);
+}
+
+/* ============================================
+   BUTTONS - Ultra Premium
+   ============================================ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 14px 32px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  background: var(--panel-glass);
+  color: var(--text);
+  font-weight: 600;
+  font-size: 16px;
+  letter-spacing: 0.02em;
+  transition: all var(--duration-normal) cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.1) 50%,
+    transparent 100%
+  );
+  transform: translateX(-100%);
+  transition: transform var(--duration-slow) ease;
+}
+
+.btn:hover::before {
+  transform: translateX(100%);
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  border-color: var(--cyan);
+  box-shadow: var(--shadow-neon);
+}
+
+.btn.primary {
+  background: linear-gradient(135deg, var(--cyan), var(--pink));
+  border: none;
+  color: #001018;
+  font-weight: 700;
+}
+
+.btn.primary:hover {
+  box-shadow: 
+    var(--shadow-neon),
+    0 0 80px rgba(0, 245, 255, 0.4);
+  transform: translateY(-3px) scale(1.02);
+}
+
+.btn.glow {
+  animation: btnGlow 2s ease-in-out infinite;
+}
+
+@keyframes btnGlow {
+  0%, 100% { box-shadow: 0 0 20px rgba(0, 245, 255, 0.3); }
+  50% { box-shadow: 0 0 40px rgba(0, 245, 255, 0.6); }
+}
+
+/* ============================================
+   NAVBAR - Ultra Premium Sticky
+   ============================================ */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 32px;
+  background: rgba(2, 4, 10, 0.8);
+  backdrop-filter: blur(40px) saturate(200%);
+  border-bottom: 1px solid var(--border);
+  transition: all var(--duration-normal) ease;
+}
+
+.navbar.scrolled {
+  padding: 12px 32px;
+  background: rgba(2, 4, 10, 0.95);
+  border-bottom: 1px solid var(--border-glow);
+  box-shadow: var(--shadow-md), var(--shadow-neon);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.brandMark {
+  font-family: var(--font-orbitron);
+  font-size: 32px;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--cyan), var(--pink), var(--yellow));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 0 20px rgba(0, 245, 255, 0.5));
+}
+
+.navlinks {
+  display: flex;
+  gap: 12px;
+}
+
+.navlinks a {
+  padding: 10px 18px;
+  border-radius: var(--radius-sm);
+  font-weight: 500;
+  font-size: 15px;
+  transition: all var(--duration-fast) ease;
+  position: relative;
+}
+
+.navlinks a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--cyan), var(--pink));
+  transform: translateX(-50%);
+  transition: width var(--duration-normal) ease;
+}
+
+.navlinks a:hover::after,
+.navlinks a.active::after {
+  width: 80%;
+}
+
+.navlinks a.active {
+  background: linear-gradient(135deg, rgba(0, 245, 255, 0.15), rgba(255, 79, 216, 0.15));
+  color: var(--cyan);
+}
+
+/* ============================================
+   HERO - Ultra Premium 3D
+   ============================================ */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 120px 32px 60px;
+  position: relative;
+  overflow: hidden;
+}
+
+.heroCanvas {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+}
+
+.heroGlow {
+  position: absolute;
+  width: 800px;
+  height: 800px;
+  background: radial-gradient(
+    circle,
+    rgba(0, 245, 255, 0.15) 0%,
+    rgba(255, 79, 216, 0.1) 50%,
+    transparent 70%
+  );
+  top: -300px;
+  right: -300px;
+  animation: glowPulse 4s ease-in-out infinite;
+}
+
+@keyframes glowPulse {
+  0%, 100% { transform: scale(1); opacity: 0.5; }
+  50% { transform: scale(1.1); opacity: 0.8; }
+}
+
+.heroCard {
+  max-width: 900px;
+  padding: 60px;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.eyebrow {
+  font-family: var(--font-orbitron);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--cyan);
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  margin-bottom: 24px;
+}
+
+.heroTitle {
+  font-size: clamp(48px, 6vw, 80px);
+  font-weight: 900;
+  line-height: 1.1;
+  margin-bottom: 24px;
+}
+
+.typing-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin: 24px 0;
+}
+
+.typing {
+  font-family: var(--font-orbitron);
+  font-size: 20px;
+  color: var(--text-secondary);
+}
+
+.typing.cursor::after {
+  content: '|';
+  color: var(--cyan);
+  animation: blinkCursor 1s infinite;
+}
+
+@keyframes blinkCursor {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+.heroText {
+  font-size: 18px;
+  color: var(--text-secondary);
+  max-width: 700px;
+  margin: 0 auto 32px;
+  line-height: 1.8;
+}
+
+.heroBtns {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  margin: 40px 0;
+}
+
+/* ============================================
+   STATS - Ultra Premium Animated
+   ============================================ */
+.stats-section {
+  padding: 80px 32px;
+  position: relative;
+}
+
+.statsGrid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+.stat-card {
+  padding: 40px 30px;
+  text-align: center;
+  position: relative;
+}
+
+.stat-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, transparent 0%, rgba(0, 245, 255, 0.05) 100%);
+  pointer-events: none;
+}
+
+.stat-value {
+  font-size: 64px;
+  font-weight: 900;
+  font-family: var(--font-orbitron);
+  background: linear-gradient(135deg, var(--cyan), var(--pink));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  line-height: 1;
+  margin-bottom: 12px;
+}
+
+.stat-label {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.stat-note {
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+/* ============================================
+   MOBILE - Ultra Premium
+   ============================================ */
+@media (max-width: 768px) {
+  .navbar {
+    padding: 14px 20px;
+  }
+  
+  .navlinks {
+    position: fixed;
+    top: 64px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(2, 4, 10, 0.98);
+    flex-direction: column;
+    padding: 40px;
+    gap: 16px;
+    opacity: 0;
+    transform: translateX(-100%);
+    transition: all var(--duration-normal) ease;
+  }
+  
+  .navlinks.open {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  
+  .mobile-menu {
+    display: block;
+    width: 44px;
+    height: 44px;
+  }
+  
+  .hero {
+    padding: 100px 20px 40px;
+  }
+  
+  .heroCard {
+    padding: 40px 24px;
+  }
+  
+  .statsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .heroBtns {
+    flex-direction: column;
+  }
+  
+  .btn {
+    width: 100%;
+  }
+}
+
+/* ============================================
+   ACCESSIBILITY - WCAG Compliance
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Focus Visible */
+:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 2px;
+}
+
+/* Skip Link */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  padding: 8px 16px;
+  background: var(--cyan);
+  color: #001018;
+  z-index: 100;
+  transition: top var(--duration-fast) ease;
+}
+
+.skip-link:focus {
+  top: 0;
+    }
